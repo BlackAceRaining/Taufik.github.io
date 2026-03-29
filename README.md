@@ -1,3 +1,3 @@
 # Taufik.github.io
 
-Assignments Web
+Repo ini berisi Tugas Tugas dari Mahasiswa Teknik Informatika UNSRAT terkait yang berasal dari Mata Kuliah Pemrograman Website
