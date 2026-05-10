@@ -1,54 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. FITUR DARK/LIGHT MODE ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.documentElement;
-    
-    // Cek penyimpanan lokal
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', savedTheme);
-    updateToggleText(savedTheme);
+    const body = document.body;
+    const html = document.documentElement;
 
-    if(themeToggle) {
+    // 1. Deteksi otomatis tema warna asal (Ungu atau Biru)
+    if (window.location.pathname.includes('gallery.html') || 
+        window.location.pathname.includes('blog.html') || 
+        window.location.pathname.includes('contact.html')) {
+        body.classList.add('blue-theme');
+    }
+
+    // 2. Logika Dark/Light Mode
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+        if(themeToggle) themeToggle.textContent = savedTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+    }
+
+    if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
-            body.setAttribute('data-theme', newTheme);
+            html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateToggleText(newTheme);
+            themeToggle.textContent = newTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
         });
     }
 
-    function updateToggleText(theme) {
-        if(themeToggle) {
-            themeToggle.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-        }
-    }
-
-    // --- 2. FITUR SCROLL REVEAL (Animasi Muncul) ---
-    const revealElements = () => {
-        const elements = document.querySelectorAll('.content-card, .card, .photo, .hero');
-        elements.forEach(el => {
-            el.classList.add('reveal'); // Tambahkan class reveal otomatis
-            const windowHeight = window.innerHeight;
-            const elementTop = el.getBoundingClientRect().top;
-            const elementVisible = 100;
-
-            if (elementTop < windowHeight - elementVisible) {
-                el.classList.add('active');
+    // 3. Scroll Reveal Animation
+    const reveal = () => {
+        const items = document.querySelectorAll('.card, .content-card, .photo, .hero');
+        items.forEach(item => {
+            const speed = 0.15;
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                item.classList.add('active');
+                item.classList.add('reveal');
             }
         });
     };
 
-    window.addEventListener('scroll', revealElements);
-    revealElements(); // Jalankan sekali saat load
-
-    // --- 3. DYNAMIC BUBBLE TEXT (Opsional) ---
-    document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            if (button.textContent.includes('Gallery')) {
-                button.setAttribute('data-bubble', 'Lihat Foto! 📸');
-            }
-        });
-    });
+    window.addEventListener('scroll', reveal);
+    reveal();
 });
