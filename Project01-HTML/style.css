@@ -1,54 +1,69 @@
-/* TEMA WARNA ASLI WEBSITE */
+/* TEMA WARNA ASLI */
 :root {
     --primary: #8b5cf6;
-    --bg-index: #2d1b4e;      /* Warna ungu di index.html */
-    --bg-other: #07132c;      /* Warna biru di gallery/blog */
-    --card-index: #3d2362;    /* Kartu ungu */
-    --card-other: #0f1b3d;    /* Kartu biru */
+    --bg-index: #2d1b4e;
+    --bg-other: #07132c;
+    --card-index: #3d2362;
+    --card-other: #0f1b3d;
     --text: #e2e8f0;
 }
 
-/* GLOBAL RESET */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-index); /* Default ke ungu */
+    background-color: var(--bg-index);
     color: var(--text);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: background-color 0.4s ease;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.5s ease;
 }
 
-/* HEADER TRANSISI */
 header {
     background: #1a0d2e;
     border-bottom: 2px solid var(--primary);
-    transition: all 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-/* --- FITUR LIFT-UP (ELEMEN NAIK) --- */
-/* Berlaku untuk tombol, kartu blog, dan foto galeri */
-.btn, .card, .photo, .content-card {
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+/* --- FITUR LIFT-UP & TRANSISI --- */
+.btn, .card, .photo, .content-card, .hero-img {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease, 
+                opacity 0.8s ease, 
+                filter 0.8s ease !important;
 }
 
-/* Saat mouse hover, elemen naik ke atas (efek bubble lift) */
+/* Efek Lift-up saat Hover */
 .btn:hover, .card:hover, .photo:hover, .content-card:hover {
-    transform: translateY(-10px); /* Naik ke atas 10px */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* PENYESUAIAN WARNA KARTU AGAR TETAP GELAP */
-.content-card { background-color: var(--card-index) !important; }
-.card { background-color: var(--card-other) !important; }
-.photo { background-color: var(--card-other) !important; }
-
-/* ANIMASI MUNCUL SAAT SCROLL (REVEAL) */
+/* --- FITUR FADE IN & FADE OUT --- */
 .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
+    opacity: 0; /* Fade out (sembunyi) */
+    filter: blur(5px);
+    transform: translateY(30px);
+    pointer-events: none;
 }
+
 .reveal.active {
-    opacity: 1;
+    opacity: 1; /* Fade in (muncul) */
+    filter: blur(0);
     transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Menjaga Warna Kartu */
+.content-card { background-color: var(--card-index) !important; border-radius: 16px; }
+.card, .photo { background-color: var(--card-other) !important; border-radius: 12px; }
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
 }
