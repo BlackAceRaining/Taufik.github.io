@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         *{box-sizing:border-box;margin:0;padding:0;}
         html,body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#07132c; color:#e2e8f0;}
@@ -10,7 +12,6 @@
         .brand{font-size:1.6rem;font-weight:900;color:#5f90ff;}
         nav ul{list-style:none;display:flex;gap:16px;}
         nav a{text-decoration:none;color:#f8fafc;font-weight:600;}
-        nav a:hover{color:#93c5fd;}
         .blog-hero{padding:40px 28px;text-align:center;}
         .blog-hero h1{font-size:3rem;color:#fff;margin-bottom:12px;}
         .blog-hero p{color:#cbd5e1;max-width:760px;margin:0 auto 24px;}
@@ -19,7 +20,6 @@
         .card h3{color:#93c5fd;margin-bottom:10px;}
         .card p{color:#dbeafe;margin-bottom:12px;font-size:.95rem;}
         .card a{display:inline-block;color:#7dd3fc;text-decoration:none;font-weight:700;margin-top:8px;}
-        .card a:hover{color:#a5f3fc;}
         footer{padding:20px 28px;text-align:center;font-size:.92rem;color:#94a3b8;border-top:1px solid #1c2b5a;}
     </style>
 </head>
@@ -30,28 +30,30 @@
     </header>
 
     <section class="blog-hero">
-        <h1>Tech Blog & Articles</h1>
-        <p>This section features short UI/UX references and best practices. Scroll horizontally to access all cards.</p>
+        <h1>Blog Teknologi & Artikel</h1>
+        <p>Bagian ini menampilkan referensi singkat UI/UX dan praktik terbaik. Gulir secara horizontal untuk mengakses semua kartu.</p>
     </section>
 
     <section class="cards">
         <article class="card">
-            <h3>UI/UX Foundations</h3>
-            <p>A solid UI/UX foundation starts with understanding user behavior, interaction best practices, and accessible design.</p>
-            <a href="https://www.interaction-design.org/literature/topics/ui-design" target="_blank" rel="noopener noreferrer">Read more</a>
+            <h3>Fondasi UI/UX</h3>
+            <p>Fondasi UI/UX yang kuat dimulai dengan memahami perilaku pengguna, praktik terbaik interaksi, dan desain yang dapat diakses.</p>
+            <a href="https://www.interaction-design.org/literature/topics/ui-design" target="_blank" rel="noopener noreferrer">Baca selengkapnya</a>
         </article>
         <article class="card">
-            <h3>HTML Learning</h3>
-            <p>Learn practical HTML fundamentals, which are essential for markup structure and accessible interface construction.</p>
-            <a href="https://www.petanikode.com/tutorial/html/" target="_blank" rel="noopener noreferrer">Explore tutorial</a>
+            <h3>Belajar HTML</h3>
+            <p>Pelajari fundamental HTML praktis, yang penting untuk struktur markup dan konstruksi antarmuka yang dapat diakses.</p>
+            <a href="https://www.petanikode.com/tutorial/html/" target="_blank" rel="noopener noreferrer">Jelajahi tutorial</a>
         </article>
         <article class="card">
-            <h3>Design Thinking in UX</h3>
-            <p>Design thinking is a repeatable process for solution discovery: empathize, define, ideate, prototype, test.</p>
-            <a href="https://www.nngroup.com/articles/design-thinking/" target="_blank" rel="noopener noreferrer">Read more</a>
+            <h3>Design Thinking dalam UX</h3>
+            <p>Design thinking adalah proses berulang untuk penemuan solusi: berempati, mendefinisikan, mengidealkan, membuat prototipe, menguji.</p>
+            <a href="https://www.nngroup.com/articles/design-thinking/" target="_blank" rel="noopener noreferrer">Baca selengkapnya</a>
         </article>
     </section>
 
     <footer>&copy; 2026 Muhammad Taufik Akbar</footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
