@@ -1,0 +1,89 @@
+/* CSS Modern untuk Portofolio Muhammad Taufik Akbar */
+:root {
+    --primary: #8b5cf6;
+    --primary-dark: #7c3aed;
+    --secondary: #2f67ff;
+    --bg-dark: #07132c;
+    --bg-card: #0f1b3d;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #d8b4fe;
+}
+
+/* Animasi Muncul */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    transition: background-color 0.5s ease;
+}
+
+header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect pada Navigasi */
+nav a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Card & Hero Animation */
+.hero, .content-card, .card, .photo, .contact-container {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Button Styling */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Image Hover effects */
+.hero-img, .photo img {
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.photo:hover img {
+    transform: scale(1.05);
+}
+
+/* Gallery Scrollbar styling */
+.photos::-webkit-scrollbar, .cards::-webkit-scrollbar {
+    height: 8px;
+}
+.photos::-webkit-scrollbar-thumb, .cards::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
