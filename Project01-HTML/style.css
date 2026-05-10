@@ -1,89 +1,120 @@
-/* CSS Modern untuk Portofolio Muhammad Taufik Akbar */
+/* ROOT VARIABLES UNTUK DARK & LIGHT MODE */
 :root {
+    /* Mode Terang (Default) */
     --primary: #8b5cf6;
-    --primary-dark: #7c3aed;
-    --secondary: #2f67ff;
-    --bg-dark: #07132c;
+    --bg-body: #f8fafc;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+}
+
+[data-theme="dark"] {
+    /* Mode Gelap */
+    --bg-body: #07132c;
+    --bg-header: #081737;
     --bg-card: #0f1b3d;
     --text-main: #e2e8f0;
     --text-muted: #94a3b8;
-    --accent: #d8b4fe;
+    --border-color: #1c2b5a;
 }
 
-/* Animasi Muncul */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-html {
-    scroll-behavior: smooth;
-}
+/* GLOBAL STYLES */
+* { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.4s ease, color 0.4s ease; }
 
 body {
-    transition: background-color 0.5s ease;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
 }
 
 header {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--primary);
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
 }
 
-/* Hover effect pada Navigasi */
-nav a {
-    position: relative;
-    transition: color 0.3s ease;
+/* NAVIGASI & THEME TOGGLE */
+nav ul { list-style: none; display: flex; gap: 16px; align-items: center; }
+nav a { text-decoration: none; color: var(--text-main); font-weight: 600; position: relative; }
+
+#theme-toggle {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--primary);
-    transition: width 0.3s ease;
-}
+#theme-toggle:hover { transform: scale(1.1); }
 
-nav a:hover::after {
-    width: 100%;
-}
-
-/* Card & Hero Animation */
-.hero, .content-card, .card, .photo, .contact-container {
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Button Styling */
+/* FITUR BUBBLE POP-UP PADA TOMBOL */
 .btn {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--primary);
+    color: #fff !important;
+    background: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-.btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4);
+/* Bubble Element */
+.btn::after {
+    content: "Klik Disini! ✨"; 
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background: var(--text-main);
+    color: var(--bg-body);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.btn:active {
+.btn:hover::after {
+    opacity: 1;
+    bottom: 130%; /* Meluncur ke atas */
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* ANIMASI MUNCUL SAAT SCROLL */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
     transform: translateY(0);
 }
 
-/* Image Hover effects */
-.hero-img, .photo img {
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.photo:hover img {
-    transform: scale(1.05);
-}
-
-/* Gallery Scrollbar styling */
-.photos::-webkit-scrollbar, .cards::-webkit-scrollbar {
-    height: 8px;
-}
-.photos::-webkit-scrollbar-thumb, .cards::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
+/* STYLE KARTU AGAR SESUAI TEMA */
+.content-card, .card, .photo {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
 }
