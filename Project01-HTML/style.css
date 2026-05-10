@@ -1,68 +1,102 @@
-/* TEMA WARNA ASLI */
+/* SISTEM TEMA DINAMIS */
 :root {
+    /* Mode Terang (Default) */
     --primary: #8b5cf6;
-    --bg-index: #2d1b4e;
-    --bg-other: #07132c;
-    --card-index: #3d2362;
-    --card-other: #0f1b3d;
-    --text: #e2e8f0;
+    --bg-body: #f8fafc;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --border-color: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Mode Gelap - Otomatis aktif saat atribut data-theme="dark" ada */
+[data-theme="dark"] {
+    --bg-body: #07132c;
+    --bg-header: #081737;
+    --bg-card: #0f1b3d;
+    --text-main: #e2e8f0;
+    --border-color: #2f4ed5;
+    --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* GLOBAL RESET & TRANSISI HALUS */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.5s ease;
+}
 
 body {
-    background-color: var(--bg-index);
-    color: var(--text);
+    background-color: var(--bg-body);
+    color: var(--text-main);
     font-family: 'Segoe UI', sans-serif;
-    transition: background-color 0.5s ease;
 }
 
 header {
-    background: #1a0d2e;
+    background: var(--bg-header);
     border-bottom: 2px solid var(--primary);
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-/* --- FITUR LIFT-UP & TRANSISI --- */
-.btn, .card, .photo, .content-card, .hero-img {
+/* --- FITUR PEMILIH TEMA (SWITCH) --- */
+#theme-toggle {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+#theme-toggle:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* --- FITUR LIFT-UP & FADE (ANIMASI) --- */
+.btn, .card, .photo, .content-card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
                 box-shadow 0.4s ease, 
-                opacity 0.8s ease, 
-                filter 0.8s ease !important;
+                opacity 0.8s ease !important;
 }
 
-/* Efek Lift-up saat Hover */
+/* Efek Naik Saat Hover (Bubble Lift) */
 .btn:hover, .card:hover, .photo:hover, .content-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px var(--shadow) !important;
 }
 
-/* --- FITUR FADE IN & FADE OUT --- */
+/* Fade In/Out saat Scroll */
 .reveal {
-    opacity: 0; /* Fade out (sembunyi) */
-    filter: blur(5px);
+    opacity: 0;
     transform: translateY(30px);
-    pointer-events: none;
 }
 
 .reveal.active {
-    opacity: 1; /* Fade in (muncul) */
-    filter: blur(0);
+    opacity: 1;
     transform: translateY(0);
-    pointer-events: auto;
 }
 
-/* Menjaga Warna Kartu */
-.content-card { background-color: var(--card-index) !important; border-radius: 16px; }
-.card, .photo { background-color: var(--card-other) !important; border-radius: 12px; }
-
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: var(--primary);
+    background: var(--primary) !important;
     color: #fff !important;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
