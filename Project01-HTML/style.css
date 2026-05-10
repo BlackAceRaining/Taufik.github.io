@@ -1,33 +1,37 @@
-/* ROOT VARIABLES UNTUK DARK & LIGHT MODE */
+/* ROOT VARIABLES DENGAN TEMA ASLI */
 :root {
-    /* Mode Terang (Default) */
     --primary: #8b5cf6;
+    --bg-body: #2d1b4e;      /* Ungu index.html */
+    --bg-header: #1a0d2e;
+    --bg-card: #3d2362;
+    --text-main: #e2e8f0;
+    --border-color: #4c2d6b;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Override untuk Halaman Biru (Gallery/Blog/Contact) */
+.blue-theme {
+    --bg-body: #07132c;
+    --bg-header: #081737;
+    --bg-card: #0f1b3d;
+    --border-color: #2f4ed5;
+}
+
+[data-theme="light"] {
     --bg-body: #f8fafc;
     --bg-header: #ffffff;
     --bg-card: #ffffff;
     --text-main: #1e293b;
-    --text-muted: #64748b;
     --border-color: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] {
-    /* Mode Gelap */
-    --bg-body: #07132c;
-    --bg-header: #081737;
-    --bg-card: #0f1b3d;
-    --text-main: #e2e8f0;
-    --text-muted: #94a3b8;
-    --border-color: #1c2b5a;
-}
-
-/* GLOBAL STYLES */
-* { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.4s ease, color 0.4s ease; }
+* { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
 
 body {
     background-color: var(--bg-body);
     color: var(--text-main);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 header {
@@ -40,29 +44,21 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
 }
 
-/* NAVIGASI & THEME TOGGLE */
-nav ul { list-style: none; display: flex; gap: 16px; align-items: center; }
-nav a { text-decoration: none; color: var(--text-main); font-weight: 600; position: relative; }
-
-#theme-toggle {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: transform 0.2s;
-}
-
-#theme-toggle:hover { transform: scale(1.1); }
-
-/* FITUR BUBBLE POP-UP PADA TOMBOL */
-.btn {
+/* --- FITUR TOMBOL NAIK (HOVER LIFT) --- */
+.btn, .card, .photo {
     position: relative;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+}
+
+/* Saat mouse hover, elemen naik ke atas */
+.btn:hover, .card:hover, .photo:hover {
+    transform: translateY(-8px); /* Angka ini menentukan seberapa tinggi naiknya */
+    box-shadow: 0 12px 24px var(--shadow) !important;
+}
+
+.btn {
     display: inline-block;
     padding: 10px 16px;
     border-radius: 8px;
@@ -72,49 +68,28 @@ nav a { text-decoration: none; color: var(--text-main); font-weight: 600; positi
     text-decoration: none;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s;
 }
 
-/* Bubble Element */
-.btn::after {
-    content: "Klik Disini! ✨"; 
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    background: var(--text-main);
-    color: var(--bg-body);
-    padding: 6px 12px;
+/* --- THEME TOGGLE BUTTON STYLE --- */
+#theme-toggle {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 15px;
     border-radius: 20px;
-    font-size: 11px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.btn:hover::after {
-    opacity: 1;
-    bottom: 130%; /* Meluncur ke atas */
-    transform: translateX(-50%) translateY(-10px);
-}
-
-/* ANIMASI MUNCUL SAAT SCROLL */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* STYLE KARTU AGAR SESUAI TEMA */
+/* Menjaga konsistensi kartu */
 .content-card, .card, .photo {
-    background: var(--bg-card) !important;
+    background-color: var(--bg-card) !important;
     border: 1px solid var(--border-color) !important;
     color: var(--text-main) !important;
+    padding: 24px;
+    border-radius: 12px;
 }
+
+/* Animasi Muncul saat Scroll */
+.reveal { opacity: 0; transform: translateY(20px); }
+.reveal.active { opacity: 1; transform: translateY(0); }
