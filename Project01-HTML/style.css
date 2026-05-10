@@ -1,95 +1,54 @@
-/* ROOT VARIABLES DENGAN TEMA ASLI */
+/* TEMA WARNA ASLI WEBSITE */
 :root {
     --primary: #8b5cf6;
-    --bg-body: #2d1b4e;      /* Ungu index.html */
-    --bg-header: #1a0d2e;
-    --bg-card: #3d2362;
-    --text-main: #e2e8f0;
-    --border-color: #4c2d6b;
-    --shadow: rgba(0, 0, 0, 0.3);
+    --bg-index: #2d1b4e;      /* Warna ungu di index.html */
+    --bg-other: #07132c;      /* Warna biru di gallery/blog */
+    --card-index: #3d2362;    /* Kartu ungu */
+    --card-other: #0f1b3d;    /* Kartu biru */
+    --text: #e2e8f0;
 }
 
-/* Override untuk Halaman Biru (Gallery/Blog/Contact) */
-.blue-theme {
-    --bg-body: #07132c;
-    --bg-header: #081737;
-    --bg-card: #0f1b3d;
-    --border-color: #2f4ed5;
-}
-
-[data-theme="light"] {
-    --bg-body: #f8fafc;
-    --bg-header: #ffffff;
-    --bg-card: #ffffff;
-    --text-main: #1e293b;
-    --border-color: #e2e8f0;
-    --shadow: rgba(0, 0, 0, 0.1);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
+/* GLOBAL RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-body);
-    color: var(--text-main);
-    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-index); /* Default ke ungu */
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.4s ease;
 }
 
+/* HEADER TRANSISI */
 header {
-    background: var(--bg-header);
+    background: #1a0d2e;
     border-bottom: 2px solid var(--primary);
-    padding: 16px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    transition: all 0.3s ease;
 }
 
-/* --- FITUR TOMBOL NAIK (HOVER LIFT) --- */
-.btn, .card, .photo {
-    position: relative;
+/* --- FITUR LIFT-UP (ELEMEN NAIK) --- */
+/* Berlaku untuk tombol, kartu blog, dan foto galeri */
+.btn, .card, .photo, .content-card {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
 }
 
-/* Saat mouse hover, elemen naik ke atas */
-.btn:hover, .card:hover, .photo:hover {
-    transform: translateY(-8px); /* Angka ini menentukan seberapa tinggi naiknya */
-    box-shadow: 0 12px 24px var(--shadow) !important;
+/* Saat mouse hover, elemen naik ke atas (efek bubble lift) */
+.btn:hover, .card:hover, .photo:hover, .content-card:hover {
+    transform: translateY(-10px); /* Naik ke atas 10px */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 2px solid var(--primary);
-    color: #fff !important;
-    background: var(--primary);
-    text-decoration: none;
-    font-weight: 700;
-    cursor: pointer;
-}
+/* PENYESUAIAN WARNA KARTU AGAR TETAP GELAP */
+.content-card { background-color: var(--card-index) !important; }
+.card { background-color: var(--card-other) !important; }
+.photo { background-color: var(--card-other) !important; }
 
-/* --- THEME TOGGLE BUTTON STYLE --- */
-#theme-toggle {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+/* ANIMASI MUNCUL SAAT SCROLL (REVEAL) */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
 }
-
-/* Menjaga konsistensi kartu */
-.content-card, .card, .photo {
-    background-color: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    color: var(--text-main) !important;
-    padding: 24px;
-    border-radius: 12px;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-/* Animasi Muncul saat Scroll */
-.reveal { opacity: 0; transform: translateY(20px); }
-.reveal.active { opacity: 1; transform: translateY(0); }
