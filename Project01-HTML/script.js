@@ -1,47 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
-    const html = document.documentElement;
 
-    // 1. Deteksi otomatis tema warna asal (Ungu atau Biru)
+    // 1. Deteksi Halaman untuk Menjaga Warna Tema Asli
+    // Jika halaman selain index, gunakan tema biru gelap
     if (window.location.pathname.includes('gallery.html') || 
         window.location.pathname.includes('blog.html') || 
         window.location.pathname.includes('contact.html')) {
-        body.classList.add('blue-theme');
+        body.style.backgroundColor = "#07132c";
+    } else {
+        body.style.backgroundColor = "#2d1b4e";
     }
 
-    // 2. Logika Dark/Light Mode
-    const themeToggle = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-        if(themeToggle) themeToggle.textContent = savedTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggle.textContent = newTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-        });
-    }
-
-    // 3. Scroll Reveal Animation
-    const reveal = () => {
+    // 2. Fungsi Scroll Reveal (Elemen Muncul Perlahan)
+    const revealElements = () => {
         const items = document.querySelectorAll('.card, .content-card, .photo, .hero');
         items.forEach(item => {
-            const speed = 0.15;
+            item.classList.add('reveal'); // Tambahkan class animasi
             const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
+            const isVisible = rect.top < (window.innerHeight - 100);
+            
+            if (isVisible) {
                 item.classList.add('active');
-                item.classList.add('reveal');
             }
         });
     };
 
-    window.addEventListener('scroll', reveal);
-    reveal();
+    // Jalankan saat scroll dan saat pertama kali halaman dibuka
+    window.addEventListener('scroll', revealElements);
+    revealElements();
+
+    // 3. Feedback Tombol (Opsional)
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mousedown', () => {
+            button.style.transform = "translateY(-2px) scale(0.95)";
+        });
+        button.addEventListener('mouseup', () => {
+            button.style.transform = "translateY(-10px) scale(1)";
+        });
+    });
 });
